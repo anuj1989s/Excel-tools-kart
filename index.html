@@ -111,7 +111,7 @@ h1.ht .l2{display:block;background:linear-gradient(90deg,var(--gold),var(--gold2
 .pbg.bestseller{background:rgba(212,168,67,.2);color:var(--gold2);border:1px solid rgba(212,168,67,.3)}
 .pbg.hot{background:rgba(224,123,42,.2);color:#ffaa60;border:1px solid rgba(224,123,42,.3)}
 .pbg.new{background:rgba(31,212,164,.12);color:var(--teal);border:1px solid rgba(31,212,164,.22)}
-.pv{height:120px;display:flex;align-items:center;justify-content:center;background:#f0fdf4;font-size:3.8rem;}
+.pv{height:160px;overflow:hidden;background:#f0fdf4;display:flex;align-items:center;justify-content:center;position:relative;}
 .pv span{filter:drop-shadow(0 6px 16px rgba(212,168,67,.3));transition:transform .3s}
 .pc:hover .pv span{transform:scale(1.15) translateY(-4px)}
 .pb{padding:18px;flex:1;display:flex;flex-direction:column}
@@ -1210,13 +1210,51 @@ function fcl(cat,btn){
 
 
 
+const PIMG={
+  'h1':'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80',
+  'h2':'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80',
+  'h3':'https://images.unsplash.com/photo-1506784365847-bbad939e9335?w=400&q=80',
+  'h4':'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400&q=80',
+  'h5':'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80',
+  'a1':'https://images.unsplash.com/photo-1591696205602-2f950c417cb9?w=400&q=80',
+  'a2':'https://images.unsplash.com/photo-1543286386-713bdd548da4?w=400&q=80',
+  'a3':'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&q=80',
+  'g1':'https://images.unsplash.com/photo-1586282391129-76a6df230234?w=400&q=80',
+  'g2':'https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=400&q=80',
+  'g3':'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=80',
+  's1':'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80',
+  'o1':'https://images.unsplash.com/photo-1553413077-190dd305871c?w=400&q=80',
+  'st1':'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&q=80',
+  'cn1':'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&q=80',
+  're1':'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&q=80',
+  'rs1':'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80',
+  'ca1':'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&q=80',
+  'cl1':'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&q=80',
+  'bi1':'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80',
+  'at1':'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=400&q=80',
+  'ag1':'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=400&q=80',
+  'hc1':'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80',
+  'ed1':'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&q=80',
+  'ht1':'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=80',
+  'rt1':'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=400&q=80',
+  'mf1':'https://images.unsplash.com/photo-1565514020179-026b92b84bb6?w=400&q=80',
+  'b1':'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&q=80',
+  'b2':'https://images.unsplash.com/photo-1607082349566-187342175e2f?w=400&q=80',
+};
+function getPImg(id,icon){
+  var u=PIMG[id];
+  if(!u) return '<div style="font-size:3.5rem;line-height:1">'+icon+'</div>';
+  return '<img src="'+u+'" style="width:100%;height:100%;object-fit:cover;display:block" '+
+    'onerror="this.parentNode.innerHTML='<div style=\"font-size:3.5rem;line-height:1;display:flex;align-items:center;justify-content:center;width:100%;height:100%\">'+icon+'</div>'">';
+}
+
 function renderProds(cat){
   const list=cat==='all'?prods:prods.filter(p=>p.cat===cat);
   const B={bestseller:'<div class="pbg bestseller">⭐ Bestseller</div>',hot:'<div class="pbg hot">🔥 Hot</div>',new:'<div class="pbg new">✨ New</div>'};
   document.getElementById('prodGrid').innerHTML=list.map(p=>`
     <div class="pc">
       ${p.badge?B[p.badge]:''}
-      <div class="pv"><span>${p.icon}</span></div>
+      <div class="pv">${getPImg(p.id,p.icon)}</div>
       <div class="pb">
         <div class="pct">${p.cat}</div>
         <div class="pn">${p.name}</div>
