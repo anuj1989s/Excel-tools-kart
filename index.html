@@ -1112,7 +1112,7 @@ footer .bx { background: linear-gradient(135deg, #16a34a, #15803d) !important; }
 </div>
 
 <script>
-const K={p:'etk_p',o:'etk_o',c:'etk_c'};
+const K={p:'etk_p3',o:'etk_o3',c:'etk_c3'};
 const DC={rzp:'rzp_test_YOUR_KEY',ejk:'',ejs:'',ejt:'',name:'Excel Tools Kart',pass:'admin@123'};
 const CATS=[
   {n:'HR & Payroll',i:'👨‍💼',d:'Salary, Attendance, Payslip, FFS'},
@@ -1171,6 +1171,8 @@ const DP=[
 let prods=[],cfg={},curProd=null,tmpFeats=[];
 
 (function init(){
+  // Clear old cached data
+  ['etk_p','etk_p2','etk_o','etk_o2','etk_c','etk_c2'].forEach(k=>localStorage.removeItem(k));
   const sp=localStorage.getItem(K.p);
   prods=sp?JSON.parse(sp):DP;
   if(!sp)localStorage.setItem(K.p,JSON.stringify(DP));
