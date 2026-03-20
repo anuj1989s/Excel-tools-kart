@@ -1098,7 +1098,7 @@ footer .bx { background: linear-gradient(135deg, #16a34a, #15803d) !important; }
             <div class="afg"><label>Icon Emoji</label><input type="text" id="pIcon" placeholder="📊" maxlength="4"/></div>
             <div class="afg"><label>Badge</label><select id="pBadge"><option value="">None</option><option value="bestseller">⭐ Bestseller</option><option value="hot">🔥 Hot</option><option value="new">✨ New</option></select></div>
           </div>
-          <div class="afg"><label>Download Link *</label><input type="url" id="pDl" placeholder="https://drive.google.com/…"/><div class="cnote">Set Google Drive to "Anyone with link can view"</div></div>
+          <div class="afg"><label>Download Link *</label><input type="url" id="pDl" placeholder="https://drive.google.com/file/d/… ya share link paste karo"/><div class="cnote">✅ Koi bhi Google Drive share link paste karo — automatically convert ho jaayega</div></div>
           <div class="afg">
             <label>Key Features</label>
             <div id="featList"></div>
@@ -1330,7 +1330,7 @@ function doSuccess(buyerName, email, paymentId){
       buyer_name:    buyerName,
       buyer_email:   email,
       product_name:  curProd.name,
-      download_url:  curProd.dl||'#',
+      download_url:  convertDriveUrl(curProd.dl||'#'),
       payment_id:    paymentId,
       amount:        curProd.price.toLocaleString('en-IN'),
       to_email:      email,
@@ -1425,7 +1425,7 @@ function delProd(id){
 function saveProd(){
   const name=document.getElementById('pName').value.trim();
   const price=parseFloat(document.getElementById('pPrice').value);
-  const dl=document.getElementById('pDl').value.trim();
+  const dl = convertDriveUrl(document.getElementById('pDl').value.trim());
   if(!name){toast('Product name required','e');return}
   if(!price||price<=0){toast('Valid price required','e');return}
   if(!dl){toast('Download URL required','e');return}
@@ -1467,6 +1467,38 @@ function startTicker(){
     if(city&&prod){city.style.opacity='0';prod.style.opacity='0';setTimeout(()=>{city.textContent=d[i][0];prod.textContent=d[i][1];city.style.opacity='1';prod.style.opacity='1'},300)}
   },3200);
 }
+/* ── GOOGLE DRIVE AUTO CONVERTER ── */
+function convertDriveUrl(url) {
+  if (!url || url === '#') return url;
+  
+  // Already a direct download link
+  if (url.includes('uc?export=download')) return url;
+  
+  let fileId = null;
+  
+  // Pattern 1: /file/d/FILE_ID/view or /file/d/FILE_ID/edit
+  const m1 = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (m1) fileId = m1[1];
+  
+  // Pattern 2: /spreadsheets/d/FILE_ID/
+  const m2 = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);
+  if (m2) fileId = m2[1];
+  
+  // Pattern 3: id=FILE_ID
+  const m3 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  if (m3) fileId = m3[1];
+  
+  // Pattern 4: open?id=FILE_ID
+  const m4 = url.match(/open\?id=([a-zA-Z0-9_-]+)/);
+  if (m4) fileId = m4[1];
+
+  if (fileId) {
+    return 'https://drive.google.com/uc?export=download&id=' + fileId;
+  }
+  
+  return url; // Return as-is if can't convert
+}
+
 function scrollToStore(){document.getElementById('store').scrollIntoView({behavior:'smooth'})}
 function esc(s){return s.replace(/'/g,"\\'")}
 let tT;
