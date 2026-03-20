@@ -888,6 +888,31 @@ footer .bx { background: linear-gradient(135deg, #16a34a, #15803d) !important; }
 
 
 .pv{height:120px;display:flex;align-items:center;justify-content:center;background:#f0fdf4;font-size:3.8rem;}
+
+/* ══ PRODUCT CARDS - CLEAN LIGHT THEME ══ */
+.pc{background:#fff !important;border:1px solid #e2e8f0 !important;border-radius:16px !important;overflow:hidden !important;display:flex !important;flex-direction:column !important;transition:all .25s !important;position:relative !important;box-shadow:0 2px 8px rgba(0,0,0,.06) !important;}
+.pc:hover{transform:translateY(-5px) !important;border-color:#16a34a !important;box-shadow:0 12px 32px rgba(22,163,74,.15) !important;}
+.pv{height:160px !important;display:flex !important;align-items:center !important;justify-content:center !important;background:linear-gradient(135deg,#f0fdf4,#dcfce7) !important;font-size:4.5rem !important;border-bottom:1px solid #e8fdf0 !important;}
+.pv span{line-height:1 !important;}
+.pb{padding:16px !important;flex:1 !important;display:flex !important;flex-direction:column !important;}
+.pct{font-family:'DM Sans',sans-serif !important;font-size:.65rem !important;color:#16a34a !important;font-weight:700 !important;letter-spacing:.08em !important;text-transform:uppercase !important;margin-bottom:6px !important;}
+.pn{font-family:'DM Sans',sans-serif !important;font-weight:800 !important;font-size:1rem !important;color:#0f172a !important;margin-bottom:8px !important;line-height:1.3 !important;}
+.pd{font-family:'DM Sans',sans-serif !important;font-size:.82rem !important;color:#64748b !important;line-height:1.6 !important;margin-bottom:12px !important;flex:1 !important;}
+.pfl{list-style:none !important;margin-bottom:14px !important;}
+.pfl li{font-family:'DM Sans',sans-serif !important;font-size:.78rem !important;color:#475569 !important;padding:3px 0 !important;display:flex !important;align-items:center !important;gap:8px !important;}
+.pfl li::before{content:'✓' !important;color:#16a34a !important;font-weight:800 !important;font-size:.8rem !important;background:none !important;width:auto !important;height:auto !important;border-radius:0 !important;}
+.pfoot{display:flex !important;align-items:center !important;justify-content:space-between !important;padding-top:12px !important;border-top:1px solid #f1f5f9 !important;gap:8px !important;}
+.pp{display:flex !important;align-items:baseline !important;gap:4px !important;}
+.po{font-size:.8rem !important;color:#94a3b8 !important;text-decoration:line-through !important;font-family:'DM Sans',sans-serif !important;}
+.pr{font-family:'DM Sans',sans-serif !important;font-weight:900 !important;font-size:1.35rem !important;color:#0f172a !important;}
+.pu{font-size:.68rem !important;color:#94a3b8 !important;font-family:'DM Sans',sans-serif !important;}
+.buybtn{background:linear-gradient(135deg,#16a34a,#15803d) !important;color:#fff !important;border:none !important;padding:10px 18px !important;border-radius:10px !important;font-weight:700 !important;font-size:.82rem !important;cursor:pointer !important;transition:all .2s !important;font-family:'DM Sans',sans-serif !important;white-space:nowrap !important;}
+.buybtn:hover{transform:scale(1.05) !important;box-shadow:0 6px 18px rgba(22,163,74,.4) !important;}
+.pbg{position:absolute !important;top:10px !important;right:10px !important;z-index:3 !important;font-size:.65rem !important;font-weight:700 !important;padding:3px 10px !important;border-radius:999px !important;font-family:'DM Sans',sans-serif !important;}
+.pbg.bestseller{background:#fef9c3 !important;color:#854d0e !important;border:1px solid #fde047 !important;}
+.pbg.hot{background:#fee2e2 !important;color:#dc2626 !important;border:1px solid #fca5a5 !important;}
+.pbg.new{background:#dbeafe !important;color:#1d4ed8 !important;border:1px solid #93c5fd !important;}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
@@ -1137,35 +1162,35 @@ const CATS=[
   {n:'Bundle',i:'🎁',d:'Multi-tool bundles — best value'},
 ];
 const DP=[
-  {id:'h1',name:'Salary Calculator + Payroll Sheet',cat:'HR & Payroll',icon:'🧑‍💼',price:799,orig:1599,badge:'bestseller',desc:'Complete payroll with PF, ESI, TDS, PT. Payslip generator included.',feats:['PF/ESI/TDS auto','Payslip generator','Multi-employee','Compliance ready'],dl:'#'},
-  {id:'h2',name:'Bulk CTC Calculator — New Wages Code',cat:'HR & Payroll',icon:'🔢',price:499,orig:999,badge:'hot',desc:'Old vs New Wages Code comparison. Take-home impact for bulk employees.',feats:['New Code 50% rule','Take-home delta','Employer cost impact','Bulk employees'],dl:'#'},
-  {id:'h3',name:'Attendance + Leave Management',cat:'HR & Payroll',icon:'📆',price:349,orig:699,badge:'',desc:'Monthly attendance tracking, leave balance, LOP auto-calculation.',feats:['Daily attendance','Leave balances','LOP auto-calc','Monthly summary'],dl:'#'},
-  {id:'h4',name:'Gratuity + Full & Final Settlement',cat:'HR & Payroll',icon:'🤝',price:399,orig:799,badge:'hot',desc:'Gratuity, leave encashment, notice pay, TDS on FFS.',feats:['Gratuity Act formula','Leave encashment','Notice pay calc','TDS on FFS'],dl:'#'},
-  {id:'h5',name:'Employee Database + HR Dashboard',cat:'HR & Payroll',icon:'👨‍👩‍👧‍👦',price:449,orig:899,badge:'',desc:'Employee master with HR dashboard and department analytics.',feats:['Employee master','Department analytics','HR KPIs','Headcount dashboard'],dl:'#'},
-  {id:'a1',name:'Cash Book & Ledger Tool',cat:'Accounting & Finance',icon:'📒',price:399,orig:799,badge:'hot',desc:'Cash book, ledger, trial balance, monthly summary.',feats:['Cash book + ledger','Trial balance auto','Monthly summary','Simple entry'],dl:'#'},
-  {id:'a2',name:'P&L Statement + Balance Sheet',cat:'Accounting & Finance',icon:'📊',price:499,orig:999,badge:'',desc:'Professional P&L and Balance Sheet for SMEs.',feats:['P&L auto calc','Balance sheet','Financial ratios','Export ready'],dl:'#'},
-  {id:'a3',name:'Loan EMI Calculator + Amortization',cat:'Accounting & Finance',icon:'🏧',price:199,orig:399,badge:'',desc:'EMI calculator, loan comparison, amortization schedule.',feats:['EMI calculation','Amortization','Loan comparison','Pre-payment'],dl:'#'},
-  {id:'g1',name:'GST Invoice & Return Tracker',cat:'GST & Tax',icon:'🧾',price:599,orig:1199,badge:'bestseller',desc:'CGST/SGST/IGST auto, GSTR-1 & 3B reconciliation.',feats:['GSTR-1 & 3B ready','HSN lookup','ITC tracker','Monthly summary'],dl:'#'},
-  {id:'g2',name:'TDS Calculator + 24Q Return',cat:'GST & Tax',icon:'💸',price:499,orig:999,badge:'hot',desc:'TDS deduction, 24Q return preparation, Form 16.',feats:['TDS auto-calc','24Q return','Form 16 ready','Employee-wise TDS'],dl:'#'},
-  {id:'g3',name:'Tax Planning Tool (Old vs New Regime)',cat:'GST & Tax',icon:'⚖️',price:299,orig:599,badge:'new',desc:'Help employees pick the right tax regime.',feats:['FY 2024-25 ready','All 80C/80D','Regime comparison','Bulk sheet'],dl:'#'},
-  {id:'s1',name:'Sales CRM Lite (Excel)',cat:'Sales & CRM',icon:'📱',price:499,orig:999,badge:'hot',desc:'Lead management, follow-up tracker, deal pipeline.',feats:['Lead management','Follow-up tracker','Deal pipeline','Customer DB'],dl:'#'},
-  {id:'o1',name:'Inventory Management System',cat:'Business Operations',icon:'📦',price:599,orig:1199,badge:'bestseller',desc:'Complete inventory with stock tracking, purchase orders.',feats:['Stock tracking','Purchase orders','Reorder alerts','Supplier mgmt'],dl:'#'},
-  {id:'st1',name:'Startup Financial Model',cat:'Startup & Founder',icon:'🚀',price:1499,orig:2999,badge:'hot',desc:'Revenue projections, burn rate, runway — investor ready.',feats:['Revenue projections','Burn rate calc','Runway calculator','Unit economics'],dl:'#'},
-  {id:'cn1',name:'BOQ Calculator + Project Costing',cat:'Construction',icon:'🏗️',price:699,orig:1399,badge:'hot',desc:'Bill of Quantity calculator, material cost, contractor billing.',feats:['BOQ calculator','Material estimator','Labour tracker','Contractor billing'],dl:'#'},
-  {id:'re1',name:'Real Estate Deal Analyser',cat:'Real Estate',icon:'🏠',price:399,orig:799,badge:'',desc:'Rental yield, ROI, EMI vs rent, resale projections.',feats:['Rental yield calc','EMI vs rent','10-yr ROI','RERA notes'],dl:'#'},
-  {id:'rs1',name:'Restaurant Sales + Kitchen Inventory',cat:'Restaurant',icon:'🍽️',price:349,orig:699,badge:'hot',desc:'Daily sales, kitchen inventory, recipe cost calculator.',feats:['Daily sales','Kitchen inventory','Recipe cost calc','Wastage tracker'],dl:'#'},
-  {id:'ca1',name:'CA Client + GST + ITR Tracker',cat:'CA & Tax Consultant',icon:'⚖️',price:799,orig:1599,badge:'bestseller',desc:'Client management, GST tracker, ITR filing for CA firms.',feats:['Client management','GST tracker','ITR tracker','Audit checklist'],dl:'#'},
-  {id:'cl1',name:'HR Compliance Calendar 2025-26',cat:'Compliance & Legal',icon:'📅',price:149,orig:299,badge:'',desc:'PF, ESIC, TDS, PT deadlines — all states.',feats:['All 12 months','State-wise PT','Penalty references','Printable A4'],dl:'#'},
-  {id:'bi1',name:'Interactive Business Dashboard',cat:'BI & Dashboards',icon:'📈',price:999,orig:1999,badge:'bestseller',desc:'Dynamic sales + profit dashboard with charts, KPI cards.',feats:['Dynamic charts','KPI cards','Filter by period','Trend analysis'],dl:'#'},
-  {id:'at1',name:'Auto Invoice Generator',cat:'Automation Tools',icon:'⚡',price:599,orig:1199,badge:'hot',desc:'One-click invoice with auto serial number, GST.',feats:['One-click generation','Auto serial no.','GST auto','Email ready'],dl:'#'},
-  {id:'ag1',name:'Farm Management + Crop Planning',cat:'Agriculture',icon:'🌾',price:299,orig:599,badge:'new',desc:'Crop planning, fertilizer cost, yield prediction.',feats:['Crop planning','Fertilizer calc','Yield prediction','Farm expenses'],dl:'#'},
-  {id:'hc1',name:'Patient Record + Appointment Tracker',cat:'Healthcare',icon:'🏥',price:399,orig:799,badge:'',desc:'Patient database, appointment scheduling, billing.',feats:['Patient database','Appointment tracker','Billing sheet','Doctor schedule'],dl:'#'},
-  {id:'ed1',name:'Student Database + Fee Tracker',cat:'Education',icon:'🎓',price:349,orig:699,badge:'',desc:'Student records, fee collection, due alerts.',feats:['Student database','Fee tracking','Due alerts','Attendance'],dl:'#'},
-  {id:'ht1',name:'Hotel Room Booking + Revenue Dashboard',cat:'Hotel & Hospitality',icon:'🏨',price:499,orig:999,badge:'',desc:'Room booking, occupancy dashboard, food cost, daily revenue.',feats:['Booking tracker','Occupancy dashboard','Food cost calc','Revenue sheet'],dl:'#'},
-  {id:'rt1',name:'Retail POS + Profit Calculator',cat:'Retail & E-Com',icon:'🛒',price:449,orig:899,badge:'',desc:'POS sales sheet, inventory, profit margin calculator.',feats:['POS sheet','Inventory tracking','Profit margin','Daily reports'],dl:'#'},
-  {id:'mf1',name:'Production Efficiency + Quality Control',cat:'Manufacturing',icon:'🏭',price:599,orig:1199,badge:'',desc:'Production efficiency, machine maintenance, defect tracking.',feats:['Efficiency tracking','Machine maintenance','Defect tracking','Quality control'],dl:'#'},
-  {id:'b1',name:'HR & Payroll Bundle (5 Tools)',cat:'Bundle',icon:'🎁',price:1999,orig:5990,badge:'bestseller',desc:'All 5 HR & Payroll tools in one bundle.',feats:['5 tools included','Complete HR kit','Lifetime updates','Priority support'],dl:'#'},
-  {id:'b2',name:'Business Mega Bundle (20 Tools)',cat:'Bundle',icon:'⭐',price:3999,orig:14990,badge:'hot',desc:'20 tools — HR, Finance, GST, Sales, Operations and more.',feats:['20 tools included','All industries','Instant download','Lifetime updates'],dl:'#'},
+  {id:'h1',name:'Salary Calculator + Payroll Sheet',cat:'HR & Payroll',icon:'🧑‍💼',price:299,orig:599,badge:'bestseller',desc:'Complete payroll with PF, ESI, TDS, PT. Payslip generator included.',feats:['PF/ESI/TDS auto','Payslip generator','Multi-employee','Compliance ready'],dl:'#'},
+  {id:'h2',name:'Bulk CTC Calculator — New Wages Code',cat:'HR & Payroll',icon:'🔢',price:199,orig:399,badge:'hot',desc:'Old vs New Wages Code comparison. Take-home impact for bulk employees.',feats:['New Code 50% rule','Take-home delta','Employer cost impact','Bulk employees'],dl:'#'},
+  {id:'h3',name:'Attendance + Leave Management',cat:'HR & Payroll',icon:'📆',price:149,orig:299,badge:'',desc:'Monthly attendance tracking, leave balance, LOP auto-calculation.',feats:['Daily attendance','Leave balances','LOP auto-calc','Monthly summary'],dl:'#'},
+  {id:'h4',name:'Gratuity + Full & Final Settlement',cat:'HR & Payroll',icon:'🤝',price:149,orig:299,badge:'hot',desc:'Gratuity, leave encashment, notice pay, TDS on FFS.',feats:['Gratuity Act formula','Leave encashment','Notice pay calc','TDS on FFS'],dl:'#'},
+  {id:'h5',name:'Employee Database + HR Dashboard',cat:'HR & Payroll',icon:'👨‍👩‍👧‍👦',price:149,orig:299,badge:'',desc:'Employee master with HR dashboard and department analytics.',feats:['Employee master','Department analytics','HR KPIs','Headcount dashboard'],dl:'#'},
+  {id:'a1',name:'Cash Book & Ledger Tool',cat:'Accounting & Finance',icon:'📒',price:149,orig:299,badge:'hot',desc:'Cash book, ledger, trial balance, monthly summary.',feats:['Cash book + ledger','Trial balance auto','Monthly summary','Simple entry'],dl:'#'},
+  {id:'a2',name:'P&L Statement + Balance Sheet',cat:'Accounting & Finance',icon:'📊',price:199,orig:399,badge:'',desc:'Professional P&L and Balance Sheet for SMEs.',feats:['P&L auto calc','Balance sheet','Financial ratios','Export ready'],dl:'#'},
+  {id:'a3',name:'Loan EMI Calculator + Amortization',cat:'Accounting & Finance',icon:'🏧',price:99,orig:199,badge:'',desc:'EMI calculator, loan comparison, amortization schedule.',feats:['EMI calculation','Amortization','Loan comparison','Pre-payment'],dl:'#'},
+  {id:'g1',name:'GST Invoice & Return Tracker',cat:'GST & Tax',icon:'🧾',price:249,orig:499,badge:'bestseller',desc:'CGST/SGST/IGST auto, GSTR-1 & 3B reconciliation.',feats:['GSTR-1 & 3B ready','HSN lookup','ITC tracker','Monthly summary'],dl:'#'},
+  {id:'g2',name:'TDS Calculator + 24Q Return',cat:'GST & Tax',icon:'💸',price:199,orig:399,badge:'hot',desc:'TDS deduction, 24Q return preparation, Form 16.',feats:['TDS auto-calc','24Q return','Form 16 ready','Employee-wise TDS'],dl:'#'},
+  {id:'g3',name:'Tax Planning Tool (Old vs New Regime)',cat:'GST & Tax',icon:'⚖️',price:99,orig:199,badge:'new',desc:'Help employees pick the right tax regime.',feats:['FY 2024-25 ready','All 80C/80D','Regime comparison','Bulk sheet'],dl:'#'},
+  {id:'s1',name:'Sales CRM Lite (Excel)',cat:'Sales & CRM',icon:'📱',price:199,orig:399,badge:'hot',desc:'Lead management, follow-up tracker, deal pipeline.',feats:['Lead management','Follow-up tracker','Deal pipeline','Customer DB'],dl:'#'},
+  {id:'o1',name:'Inventory Management System',cat:'Business Operations',icon:'📦',price:249,orig:499,badge:'bestseller',desc:'Complete inventory with stock tracking, purchase orders.',feats:['Stock tracking','Purchase orders','Reorder alerts','Supplier mgmt'],dl:'#'},
+  {id:'st1',name:'Startup Financial Model',cat:'Startup & Founder',icon:'🚀',price:499,orig:999,badge:'hot',desc:'Revenue projections, burn rate, runway — investor ready.',feats:['Revenue projections','Burn rate calc','Runway calculator','Unit economics'],dl:'#'},
+  {id:'cn1',name:'BOQ Calculator + Project Costing',cat:'Construction',icon:'🏗️',price:299,orig:599,badge:'hot',desc:'Bill of Quantity calculator, material cost, contractor billing.',feats:['BOQ calculator','Material estimator','Labour tracker','Contractor billing'],dl:'#'},
+  {id:'re1',name:'Real Estate Deal Analyser',cat:'Real Estate',icon:'🏠',price:149,orig:299,badge:'',desc:'Rental yield, ROI, EMI vs rent, resale projections.',feats:['Rental yield calc','EMI vs rent','10-yr ROI','RERA notes'],dl:'#'},
+  {id:'rs1',name:'Restaurant Sales + Kitchen Inventory',cat:'Restaurant',icon:'🍽️',price:149,orig:299,badge:'hot',desc:'Daily sales, kitchen inventory, recipe cost calculator.',feats:['Daily sales','Kitchen inventory','Recipe cost calc','Wastage tracker'],dl:'#'},
+  {id:'ca1',name:'CA Client + GST + ITR Tracker',cat:'CA & Tax Consultant',icon:'⚖️',price:299,orig:599,badge:'bestseller',desc:'Client management, GST tracker, ITR filing for CA firms.',feats:['Client management','GST tracker','ITR tracker','Audit checklist'],dl:'#'},
+  {id:'cl1',name:'HR Compliance Calendar 2025-26',cat:'Compliance & Legal',icon:'📅',price:99,orig:199,badge:'',desc:'PF, ESIC, TDS, PT deadlines — all states.',feats:['All 12 months','State-wise PT','Penalty references','Printable A4'],dl:'#'},
+  {id:'bi1',name:'Interactive Business Dashboard',cat:'BI & Dashboards',icon:'📈',price:349,orig:699,badge:'bestseller',desc:'Dynamic sales + profit dashboard with charts, KPI cards.',feats:['Dynamic charts','KPI cards','Filter by period','Trend analysis'],dl:'#'},
+  {id:'at1',name:'Auto Invoice Generator',cat:'Automation Tools',icon:'⚡',price:249,orig:499,badge:'hot',desc:'One-click invoice with auto serial number, GST.',feats:['One-click generation','Auto serial no.','GST auto','Email ready'],dl:'#'},
+  {id:'ag1',name:'Farm Management + Crop Planning',cat:'Agriculture',icon:'🌾',price:99,orig:199,badge:'new',desc:'Crop planning, fertilizer cost, yield prediction.',feats:['Crop planning','Fertilizer calc','Yield prediction','Farm expenses'],dl:'#'},
+  {id:'hc1',name:'Patient Record + Appointment Tracker',cat:'Healthcare',icon:'🏥',price:149,orig:299,badge:'',desc:'Patient database, appointment scheduling, billing.',feats:['Patient database','Appointment tracker','Billing sheet','Doctor schedule'],dl:'#'},
+  {id:'ed1',name:'Student Database + Fee Tracker',cat:'Education',icon:'🎓',price:149,orig:299,badge:'',desc:'Student records, fee collection, due alerts.',feats:['Student database','Fee tracking','Due alerts','Attendance'],dl:'#'},
+  {id:'ht1',name:'Hotel Room Booking + Revenue Dashboard',cat:'Hotel & Hospitality',icon:'🏨',price:199,orig:399,badge:'',desc:'Room booking, occupancy dashboard, food cost, daily revenue.',feats:['Booking tracker','Occupancy dashboard','Food cost calc','Revenue sheet'],dl:'#'},
+  {id:'rt1',name:'Retail POS + Profit Calculator',cat:'Retail & E-Com',icon:'🛒',price:179,orig:349,badge:'',desc:'POS sales sheet, inventory, profit margin calculator.',feats:['POS sheet','Inventory tracking','Profit margin','Daily reports'],dl:'#'},
+  {id:'mf1',name:'Production Efficiency + Quality Control',cat:'Manufacturing',icon:'🏭',price:249,orig:499,badge:'',desc:'Production efficiency, machine maintenance, defect tracking.',feats:['Efficiency tracking','Machine maintenance','Defect tracking','Quality control'],dl:'#'},
+  {id:'b1',name:'HR & Payroll Bundle (5 Tools)',cat:'Bundle',icon:'🎁',price:799,orig:1999,badge:'bestseller',desc:'All 5 HR & Payroll tools in one bundle.',feats:['5 tools included','Complete HR kit','Lifetime updates','Priority support'],dl:'#'},
+  {id:'b2',name:'Business Mega Bundle (20 Tools)',cat:'Bundle',icon:'⭐',price:1499,orig:3999,badge:'hot',desc:'20 tools — HR, Finance, GST, Sales, Operations and more.',feats:['20 tools included','All industries','Instant download','Lifetime updates'],dl:'#'},
 ];
 
 let prods=[],cfg={},curProd=null,tmpFeats=[];
