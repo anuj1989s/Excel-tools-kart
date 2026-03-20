@@ -882,6 +882,7 @@ footer strong { color: #f1f5f9 !important; }
 footer .bx { background: linear-gradient(135deg, #16a34a, #15803d) !important; }
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -1258,24 +1259,61 @@ function doPay(){
   if(!name){toast('Please enter your name','e');return}
   if(!email.includes('@')){toast('Enter a valid email','e');return}
   if(phone.length<10){toast('Enter valid 10-digit phone','e');return}
-  if(typeof Razorpay!=='undefined'){
+  if(typeof Razorpay!=='undefined' && cfg.rzp && cfg.rzp!=='rzp_test_YOUR_KEY'){
     new Razorpay({key:cfg.rzp,amount:curProd.price*100,currency:'INR',
       name:cfg.name||'Excel Tools Kart',description:curProd.name,
-      prefill:{name,email,contact:phone},theme:{color:'#d4a843'},
-      handler:()=>doSuccess(email),modal:{ondismiss:()=>{}}}).open();
-  } else doSuccess(email);
+      prefill:{name,email,contact:phone},theme:{color:'#16a34a'},
+      handler:function(res){doSuccess(name,email,res.razorpay_payment_id);},
+      modal:{ondismiss:()=>{}}}).open();
+  } else {
+    // Demo mode — no Razorpay key set
+    doSuccess(name,email,'DEMO-'+Date.now());
+  }
 }
-function doSuccess(email){
-  const o={id:'ORD-'+Date.now(),productName:curProd.name,amount:curProd.price,buyerEmail:email,timestamp:new Date().toISOString()};
-  const os=JSON.parse(localStorage.getItem(K.o)||'[]');os.unshift(o);localStorage.setItem(K.o,JSON.stringify(os));
+
+function doSuccess(buyerName, email, paymentId){
+  // Save order
+  const o={id:'ORD-'+Date.now(),productName:curProd.name,amount:curProd.price,
+    buyerEmail:email,buyerName:buyerName,paymentId:paymentId,
+    timestamp:new Date().toISOString()};
+  const os=JSON.parse(localStorage.getItem(K.o)||'[]');
+  os.unshift(o);localStorage.setItem(K.o,JSON.stringify(os));
+
+  // Send email via EmailJS
+  if(cfg.ejk && cfg.ejs && cfg.ejt){
+    emailjs.init(cfg.ejk);
+    const params={
+      buyer_name:    buyerName,
+      buyer_email:   email,
+      product_name:  curProd.name,
+      download_url:  curProd.dl||'#',
+      payment_id:    paymentId,
+      amount:        curProd.price.toLocaleString('en-IN'),
+      to_email:      email,
+    };
+    emailjs.send(cfg.ejs, cfg.ejt, params)
+      .then(function(){
+        toast('✅ Download link email sent!','s');
+      })
+      .catch(function(err){
+        console.error('EmailJS error:',err);
+        toast('⚠️ Email bhejne mein problem — admin se contact karo','e');
+      });
+  } else {
+    toast('⚠️ EmailJS settings configure nahi hain Admin mein','e');
+  }
+
+  // Show success screen
   document.getElementById('buyContent').innerHTML=`
     <div style="text-align:center;padding:10px 0">
       <div style="font-size:3.5rem;margin-bottom:16px">🎉</div>
-      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:1.5rem;margin-bottom:10px">Payment Successful!</div>
-      <p style="color:var(--muted);font-size:.88rem;line-height:1.75">Download link sent to<br><strong style="color:var(--gold2)">${email}</strong><br><br>Check inbox within 2 minutes.</p>
-      <button class="bgold" style="margin-top:24px;width:100%;padding:14px" onclick="closeBuyModal()">Continue Shopping →</button>
+      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:1.5rem;margin-bottom:10px;color:#0f172a">Payment Successful!</div>
+      <p style="color:#475569;font-size:.88rem;line-height:1.8">Download link bheja ja raha hai<br><strong style="color:#16a34a">${email}</strong> pe<br><br>2 minute mein inbox check karo.<br>Spam folder bhi check karo.</p>
+      <div style="background:#f0fdf4;border:1px solid #d1fae5;border-radius:10px;padding:12px;margin:16px 0;font-size:.82rem;color:#15803d">
+        Payment ID: <strong>${paymentId}</strong>
+      </div>
+      <button class="bgold" style="margin-top:8px;width:100%;padding:14px" onclick="closeBuyModal()">Continue Shopping →</button>
     </div>`;
-  toast('✅ Email sent!','s');
 }
 function openAdminLogin(){document.getElementById('adminPass').value='';document.getElementById('adminLOv').classList.add('open')}
 function verifyAdmin(){
