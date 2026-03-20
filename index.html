@@ -883,6 +883,7 @@ footer .bx { background: linear-gradient(135deg, #16a34a, #15803d) !important; }
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
 
@@ -1259,7 +1260,7 @@ function doPay(){
   if(!name){toast('Please enter your name','e');return}
   if(!email.includes('@')){toast('Enter a valid email','e');return}
   if(phone.length<10){toast('Enter valid 10-digit phone','e');return}
-  if(typeof Razorpay!=='undefined' && cfg.rzp && cfg.rzp!=='rzp_test_YOUR_KEY'){
+  if(typeof Razorpay!=='undefined' && cfg.rzp && cfg.rzp.startsWith('rzp_')){
     new Razorpay({key:cfg.rzp,amount:curProd.price*100,currency:'INR',
       name:cfg.name||'Excel Tools Kart',description:curProd.name,
       prefill:{name,email,contact:phone},theme:{color:'#16a34a'},
